@@ -4,6 +4,12 @@ export default function SystemSettings() {
   return (
     <ProtectedRoute allowedRoles={[1, 2]}>
       <div className="space-y-6">
+        <div className="hidden md:flex items-center w-full h-10 border-1 border-[#CCB5E3] px-5 capitalize rounded-lg mt-3 mb-8 ">
+          <span className="text-[#6C757D] text-sm">dashboard / </span>{" "}
+          <span className="text-[#000640] font-semibold text-sm">
+            &nbsp;settings
+          </span>
+        </div>
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold ">System Settings</h1>
         </div>

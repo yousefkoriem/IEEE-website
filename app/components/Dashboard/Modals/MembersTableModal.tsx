@@ -21,7 +21,8 @@ export const MembersTableModal: React.FC<MembersTableModalProps> = ({
 
   if (!isOpen) return null;
 
-  const filteredMembers = (members || []).filter(
+  const safeMembers = Array.isArray(members) ? members : [];
+  const filteredMembers = safeMembers.filter(
     (m) =>
       (m?.name || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
       (m?.committee || "").toLowerCase().includes(searchTerm.toLowerCase()) ||

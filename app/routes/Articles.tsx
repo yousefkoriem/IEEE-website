@@ -44,7 +44,7 @@ export default function Artical() {
   const articlesPerPage = 3;
 
   // Filter articles to show only those
-  const filteredArticles = articles
+  const filteredArticles = Array.isArray(articles)
     ? articles.filter((article: Article) => article.categoryName !== "Events")
     : [];
 

@@ -63,13 +63,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 function AppShell() {
   const location = useLocation();
   const isDashboardRoute = location.pathname.startsWith("/dashboard");
+  const isAuthRoute =
+    location.pathname === "/login" || location.pathname === "/register";
+  const hideNavbar = isDashboardRoute || isAuthRoute;
 
   return (
     <>
-      {!isDashboardRoute && <Navbar />}
+      {!hideNavbar && <Navbar />}
       <InactiveBanner />
       <Outlet />
-      <Chatbot />
+      {!isAuthRoute && <Chatbot />}
     </>
   );
 }

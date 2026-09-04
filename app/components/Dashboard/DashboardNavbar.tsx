@@ -88,7 +88,7 @@ const DashboardNavbar = ({ onNotificationClick }: IProps) => {
               dashboard /
             </span>
             <span className={`ml-1 truncate text-[11px] font-semibold sm:text-sm ${isDark ? "text-white" : "text-[#000640]"}`}>
-              meetings
+              {location.pathname.split("/").filter(Boolean).pop() || "dashboard"}
             </span>
           </div>
         </div>

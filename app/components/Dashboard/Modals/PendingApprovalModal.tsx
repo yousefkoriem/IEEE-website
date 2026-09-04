@@ -21,6 +21,8 @@ export const PendingApprovalModal: React.FC<PendingApprovalModalProps> = ({
 
   if (!isOpen) return null;
 
+  const safePendingMembers = Array.isArray(pendingMembers) ? pendingMembers : [];
+
   const handleApprove = (id: number) => {
     approveMutation.mutate(id);
   };
@@ -42,7 +44,7 @@ export const PendingApprovalModal: React.FC<PendingApprovalModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pb-4 border-b border-gray-100 dark:border-gray-800">
           <h3 className="text-xl font-bold text-[#000640] dark:text-white">
-            Pending Approvals ({pendingMembers.length})
+            Pending Approvals ({safePendingMembers.length})
           </h3>
           <button
             onClick={onClose}
@@ -54,12 +56,12 @@ export const PendingApprovalModal: React.FC<PendingApprovalModalProps> = ({
 
         {/* Member Cards List */}
         <div className="mt-5 space-y-3.5 max-h-[60vh] overflow-y-auto pr-1">
-          {pendingMembers.length === 0 ? (
+          {safePendingMembers.length === 0 ? (
             <div className="text-center py-8 text-sm text-gray-400 font-medium">
               No pending approvals at this time.
             </div>
           ) : (
-            pendingMembers.map((member) => (
+            safePendingMembers.map((member) => (
               <div
                 key={member.id}
                 className="p-4 rounded-2xl bg-indigo-50/50 dark:bg-gray-900/60 border border-indigo-100 dark:border-gray-800 flex items-center justify-between gap-4"

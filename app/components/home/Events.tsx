@@ -10,7 +10,7 @@ export default function Events() {
     
     // Fetch articles directly from API. Filter by "Events" category or take top articles
     const eventsData = React.useMemo(() => {
-        if (!articles || articles.length === 0) return [];
+        if (!Array.isArray(articles) || articles.length === 0) return [];
         const eventsCategoryArticles = articles.filter(a => a.categoryName === "Events");
         return eventsCategoryArticles.length > 0 
             ? eventsCategoryArticles.slice(0, 3) 

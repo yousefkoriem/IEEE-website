@@ -285,13 +285,11 @@ const ArticlesManagement = () => {
   return (
     <ProtectedRoute allowedRoles={[1, 2]}>
       <div className="min-h-screen pb-12 w-full">
-        {/* Breadcrumb Strip - Full Width Container */}
-        <div className="mb-4 w-full">
-          <div className="w-full bg-white border border-purple-100/70 rounded-xl px-4 py-2 text-xs font-semibold text-gray-600 shadow-2xs flex items-center gap-2">
-            <span className="text-gray-400">Dashboard</span>
-            <span className="text-gray-300">/</span>
-            <span className="text-[#5A10A5] font-extrabold">Articles</span>
-          </div>
+        <div className="hidden md:flex items-center w-full h-10 border-1 border-[#CCB5E3] px-5 capitalize rounded-lg mt-3 mb-8 ">
+          <span className="text-[#6C757D] text-sm">dashboard / </span>{" "}
+          <span className="text-[#000640] font-semibold text-sm">
+            &nbsp;articles
+          </span>
         </div>
 
         {/* Page Header Bar */}

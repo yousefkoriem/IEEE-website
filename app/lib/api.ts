@@ -59,6 +59,8 @@ export function extractArrayData<T>(data: any): T[] {
   if (data.data && Array.isArray(data.data.$values)) return data.data.$values;
   if (Array.isArray(data.items)) return data.items;
   if (Array.isArray(data.results)) return data.results;
+  if (Array.isArray(data.users)) return data.users;
+  if (Array.isArray(data.members)) return data.members;
   return [];
 }
 
@@ -944,7 +946,7 @@ export const getDashboardStats = async (): Promise<DashboardStats> => {
 export const getRecentActivities = async (): Promise<RecentActivityItem[]> => {
   try {
     const response = await apiClient.get("/Dashboard/activities");
-    return response.data;
+    return extractArrayData<RecentActivityItem>(response.data);
   } catch {
     return [
       {
@@ -984,7 +986,7 @@ export const getRecentActivities = async (): Promise<RecentActivityItem[]> => {
 export const getMembers = async (): Promise<DashboardMember[]> => {
   try {
     const response = await apiClient.get("/Users");
-    return response.data;
+    return extractArrayData<DashboardMember>(response.data);
   } catch {
     return [
       {
@@ -1166,7 +1168,7 @@ export const rejectMember = async (id: number) => {
 export const getUpcomingEvents = async (): Promise<DashboardEvent[]> => {
   try {
     const response = await apiClient.get("/events");
-    return response.data;
+    return extractArrayData<DashboardEvent>(response.data);
   } catch {
     return [
       {

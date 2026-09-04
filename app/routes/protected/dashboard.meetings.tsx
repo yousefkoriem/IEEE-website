@@ -187,6 +187,12 @@ export default function DashboardMeetings() {
 
   return (
     <div className="p-3 space-y-6 pb-12">
+      <div className="hidden md:flex items-center w-full h-10 border-1 border-[#CCB5E3] px-5 capitalize rounded-lg mt-3 mb-8 ">
+        <span className="text-[#6C757D] text-sm">dashboard / </span>{" "}
+        <span className="text-[#000640] font-semibold text-sm">
+          &nbsp;meetings
+        </span>
+      </div>
       {/* Top Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>

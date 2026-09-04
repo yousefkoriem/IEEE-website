@@ -45,7 +45,7 @@ import HighBoardSection from "../components/home/HighBoardSection";
 import Sponsers from "./sponsors";
 
 
-export function meta({}: MetaArgs) {
+export function meta({ }: MetaArgs) {
   return [
     { title: "IEEE BNS - Beni Suef University Student Branch" },
     {
@@ -106,7 +106,7 @@ export default function Home() {
   const articlesPerPage = 3;
 
   // Filter articles to show only those
-  const filteredArticles = articles
+  const filteredArticles = Array.isArray(articles)
     ? articles.filter((article: Article) => article.categoryName !== "Events")
     : [];
 
@@ -227,7 +227,7 @@ export default function Home() {
       <Commitees />
       <HighBoardSection />
 
-      
+
 
       {/* Sponsers Section */}
 

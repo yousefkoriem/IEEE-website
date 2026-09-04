@@ -92,14 +92,15 @@ export default function DashboardEmails() {
   return (
     <ProtectedRoute allowedRoles={[1]}>
       <div className="space-y-6 pb-16">
-        {/* Breadcrumb & Header Section */}
+        <div className="hidden md:flex items-center w-full h-10 border-1 border-[#CCB5E3] px-5 capitalize rounded-lg mt-3 mb-8 ">
+          <span className="text-[#6C757D] text-sm">dashboard / </span>{" "}
+          <span className="text-[#000640] font-semibold text-sm">
+            &nbsp;emails
+          </span>
+        </div>
+        {/* Header Section */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-gray-400 mb-1">
-              <span>Dashboard</span>
-              <span>/</span>
-              <span className="text-[#5A10A5]">Email</span>
-            </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-[#000640] tracking-tight">
               Broadcast Emails
             </h1>

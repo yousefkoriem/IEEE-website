@@ -128,12 +128,12 @@ export default function EventsTimeline() {
   const error = articlesError || eventsError;
 
   // 1. Articles filtered by categoryName = "Events"
-  const articleEvents: Article[] = articles
+  const articleEvents: Article[] = Array.isArray(articles)
     ? articles.filter((a) => a.categoryName === "Events")
     : [];
 
   // 2. Map ApiEvent → Article shape so TimelineItem works for both
-  const mappedApiEvents: Article[] = apiEvents
+  const mappedApiEvents: Article[] = Array.isArray(apiEvents)
     ? apiEvents.map((e: any) => ({
         id: undefined,
         title: e.name,

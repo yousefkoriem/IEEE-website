@@ -25,6 +25,7 @@ import {
   useAllArticles,
   useAllEvents,
 } from "~/hooks/useApi";
+import { extractArrayData } from "~/lib/api";
 import { useAuth } from "~/hooks/useAuth";
 import type { DashboardMember, SuccessModalProps } from "~/types/dashboard";
 
@@ -61,16 +62,25 @@ export const HighBoardDashboard: React.FC = () => {
   // Queries
   const { data: stats } = useDashboardStats();
   const { data: activities } = useRecentActivities();
-  const { data: membersList = [] } = useMembers();
-  const { data: meetingsList = [] } = useAllMeetings();
-  const { data: committeesList = [] } = useCommittees();
-  const { data: articlesList = [] } = useAllArticles();
-  const { data: eventsList = [] } = useAllEvents();
+  const { data: rawMembersList = [] } = useMembers();
+  const { data: rawMeetingsList = [] } = useAllMeetings();
+  const { data: rawCommitteesList = [] } = useCommittees();
+  const { data: rawArticlesList = [] } = useAllArticles();
+  const { data: rawEventsList = [] } = useAllEvents();
 
-  const latestMeeting = meetingsList && meetingsList.length > 0 ? meetingsList[0] : null;
+  const membersList = extractArrayData<DashboardMember>(rawMembersList);
+  const meetingsList = extractArrayData<any>(rawMeetingsList);
+  const committeesList = extractArrayData<any>(rawCommitteesList);
+  const articlesList = extractArrayData<any>(rawArticlesList);
+  const eventsList = extractArrayData<any>(rawEventsList);
+
+  const latestMeeting =
+    meetingsList && meetingsList.length > 0 ? meetingsList[0] : null;
   const meetingCommitteeName = (() => {
     if (!latestMeeting) return "UI/UX Committee";
-    const found = committeesList.find((c) => c.id === latestMeeting.committeeId);
+    const found = committeesList.find(
+      (c) => c.id === latestMeeting.committeeId,
+    );
     return found?.name || "IEEE Committee";
   })();
 
@@ -101,13 +111,13 @@ export const HighBoardDashboard: React.FC = () => {
     isOpen: false,
     title: "",
     buttonText: "Done",
-    onButtonClick: () => {},
+    onButtonClick: () => { },
   });
 
   const triggerSuccess = (
     title: string,
     buttonText: string,
-    action = () => {},
+    action = () => { },
   ) => {
     setSuccessModal({
       isOpen: true,
@@ -117,7 +127,9 @@ export const HighBoardDashboard: React.FC = () => {
     });
   };
 
-  const pendingMembers = membersList.filter((m: any) => !m.isActive || m.status === "Pending");
+  const pendingMembers = membersList
+    ? membersList.filter((m: any) => !m.isActive || m.status === "Pending")
+    : [];
 
   const statsCards = [
     {
@@ -258,7 +270,11 @@ export const HighBoardDashboard: React.FC = () => {
 
         <DashboardAlertCard
           icon={<CalendarCheck className="w-4 h-4" color="#4460EF" />}
-          text={latestMeeting ? `Next meeting: ${latestMeeting.title}` : "No upcoming meetings scheduled."}
+          text={
+            latestMeeting
+              ? `Next meeting: ${latestMeeting.title}`
+              : "No upcoming meetings scheduled."
+          }
           cardBackground="bg-[#EEF1FF]"
           iconBackground="bg-[#4460EF20]"
           iconColor="text-[#4460EF]"
@@ -287,10 +303,23 @@ export const HighBoardDashboard: React.FC = () => {
           bannerTitle={meetingCommitteeName}
           title={latestMeeting?.title || "Weekly UI/UX Meeting"}
           committee={meetingCommitteeName}
-          date={latestMeeting?.createdAt ? new Date(latestMeeting.createdAt).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" }) : "Thursday, July 20, 2026"}
+          date={
+            latestMeeting?.createdAt
+              ? new Date(latestMeeting.createdAt).toLocaleDateString("en-US", {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })
+              : "Thursday, July 20, 2026"
+          }
           time={latestMeeting?.recap || "6:00 PM — 7:30 PM"}
-          location={latestMeeting?.description || "Room 304, Engineering Building"}
-          attendanceCount={latestMeeting?.users?.filter((u) => u.attended)?.length ?? 32}
+          location={
+            latestMeeting?.description || "Room 304, Engineering Building"
+          }
+          attendanceCount={
+            latestMeeting?.users?.filter((u: any) => u.attended)?.length ?? 32
+          }
           totalCount={latestMeeting?.users?.length || 36}
           avatars={["MA", "KN", "LI", "NH", "OY"]}
           onViewDetails={() => setMeetingDetailsOpen(true)}
@@ -347,8 +376,16 @@ export const HighBoardDashboard: React.FC = () => {
           eventCount={5}
           events={[
             { title: "UI/UX Meeting", date: "Jul 20", dotColor: "bg-blue-500" },
-            { title: "Tech Workshop", date: "Jul 22", dotColor: "bg-purple-500" },
-            { title: "Branch Assembly", date: "Jul 27", dotColor: "bg-[#311150]" },
+            {
+              title: "Tech Workshop",
+              date: "Jul 22",
+              dotColor: "bg-purple-500",
+            },
+            {
+              title: "Branch Assembly",
+              date: "Jul 27",
+              dotColor: "bg-[#311150]",
+            },
           ]}
           onClick={() => setCalendarOpen(true)}
         />
