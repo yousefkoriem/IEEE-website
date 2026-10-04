@@ -150,11 +150,11 @@ export const AmbassadorsSection: React.FC = () => {
           <p className="text-center text-white/60 text-xs uppercase tracking-wider mb-6">
             OUR AMBASSADORS
           </p>
-          <div className="relative max-w-4xl mx-auto">
+          <div className="relative max-w-4xl mx-auto h-40">
             {/* SVG curved line */}
             <svg
               viewBox="0 0 800 200"
-              className="w-full h-32"
+              className="w-full h-full"
               preserveAspectRatio="xMidYMid meet"
             >
               {/* Curved path */}
@@ -166,9 +166,9 @@ export const AmbassadorsSection: React.FC = () => {
                 </linearGradient>
               </defs>
               
-              {/* Main curved line */}
+              {/* Main curved line - starts low (y=170), ends high (y=80) */}
               <motion.path
-                d="M 100 150 Q 400 50, 700 150"
+                d="M 100 170 Q 400 40, 700 80"
                 fill="none"
                 stroke="url(#lineGradient)"
                 strokeWidth="3"
@@ -192,22 +192,22 @@ export const AmbassadorsSection: React.FC = () => {
                   ease: "linear"
                 }}
                 style={{
-                  offsetPath: "path('M 100 150 Q 400 50, 700 150')",
+                  offsetPath: "path('M 100 170 Q 400 40, 700 80')",
                   offsetRotate: "0deg"
                 }}
               />
             </svg>
 
             {/* Location markers */}
-            <div className="absolute left-0 bottom-0 flex flex-col items-center">
+            <div className="absolute left-[8%] bottom-2 flex flex-col items-center">
               <div className="w-3 h-3 bg-[#818cf8] rounded-full ring-4 ring-[#818cf8]/30" />
-              <p className="text-white font-bold text-sm mt-2">Beni-Suef, Egypt</p>
+              <p className="text-white font-bold text-sm mt-2 whitespace-nowrap">Beni-Suef, Egypt</p>
             </div>
 
-            <div className="absolute right-0 bottom-0 flex flex-col items-center">
+            <div className="absolute right-[8%] top-8 flex flex-col items-center">
               <div className="w-3 h-3 bg-[#818cf8] rounded-full ring-4 ring-[#818cf8]/30" />
-              <p className="text-white font-bold text-sm mt-2 text-right">IEEE Region 8</p>
-              <p className="text-blue-200 text-xs mt-1">Europe, Middle East, Africa</p>
+              <p className="text-white font-bold text-sm mt-2 text-center whitespace-nowrap">IEEE Region 8</p>
+              <p className="text-blue-200 text-xs mt-1 whitespace-nowrap">Europe, Middle East, Africa</p>
             </div>
           </div>
         </motion.div>
