@@ -41,24 +41,24 @@ const Navbar = () => {
     }
   }, []);
 
-  // Shared nav items (added "Contact Us")
+  // Shared nav items
   const navItems = [
     { label: "Home", path: "/", icon: Home },
-    { label: "Committees", path: "/#committees", icon: Boxes },
     { label: "Events", path: "/events", icon: Calendar },
-    { label: "Articles", path: "/articles", icon: FileText },
+    { label: "Chapters", path: "/committees", icon: Boxes },
+    { label: "Committees", path: "/committees", icon: Boxes },
     { label: "About", path: "/about", icon: Users },
-    { label: "Contact Us", path: "/contact", icon: Users },
+    { label: "Achievements", path: "/#achievements", icon: FileText },
   ];
 
   const authNavItems = [
     { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
     { label: "Home", path: "/", icon: Home },
-    { label: "Committees", path: "/#committees", icon: Boxes },
     { label: "Events", path: "/events", icon: Calendar },
-    { label: "Articles", path: "/articles", icon: FileText },
+    { label: "Chapters", path: "/committees", icon: Boxes },
+    { label: "Committees", path: "/committees", icon: Boxes },
     { label: "About", path: "/about", icon: Users },
-    { label: "Contact Us", path: "/contact", icon: Users },
+    { label: "Achievements", path: "/#achievements", icon: FileText },
   ];
 
   const currentNavItems = isMounted && isAuthenticated ? authNavItems : navItems;
